@@ -1,6 +1,6 @@
 import urllib2
 
-import fileutils
+import files
 import console
 
 DOWNLOAD_BUFFER_SIZE = 32768 # bytes
