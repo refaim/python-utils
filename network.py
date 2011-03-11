@@ -8,7 +8,7 @@ DOWNLOAD_BUFFER_SIZE = 32768 # bytes
 
 def download(src, dst, progress=True, bufsize=DOWNLOAD_BUFFER_SIZE):
     remote = urllib2.urlopen(src)
-    localsize = fileutils.filesize(dst)
+    localsize = files.filesize(dst)
     remotesize = int(remote.headers.get('Content-Length'))
 
     # wrong file
