@@ -5,9 +5,9 @@ import files
 import console
 
 DOWNLOAD_BUFFER_SIZE = 32768 # bytes
+DEFAULT_TIMEOUT = 10
 
-
-def download(src, dst, progress=True, bufsize=DOWNLOAD_BUFFER_SIZE):
+def download(src, dst, progress=True, bufsize=DOWNLOAD_BUFFER_SIZE, timeout=DEFAULT_TIMEOUT):
     remote = urllib2.urlopen(src)
     localsize = files.filesize(dst)
     remotesize = int(remote.headers.get('Content-Length') or 0)
@@ -24,7 +24,7 @@ def download(src, dst, progress=True, bufsize=DOWNLOAD_BUFFER_SIZE):
             # set current file size in HTTP 'Range' header for partial content request
             request.headers['Range'] = 'bytes={0}-'.format(localsize)
 
-        remote = urllib2.urlopen(request)
+        remote = urllib2.urlopen(request, timeout=timeout)
 
         if progress:
             pbar = console.ProgressBar(maxval=remotesize)
