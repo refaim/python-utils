@@ -1,4 +1,6 @@
-﻿import sys
+﻿from __future__ import print_function
+
+import sys
 
 
 class ProgressBar(object):
@@ -102,6 +104,12 @@ def getTerminalWidth():
 
 def getTerminalHeight():
     return getTerminalSize()[1]
+
+
+def writeline(value, ljust=True, end='\r'):
+    if not isinstance(value, basestring):
+        value = '{0}'.format(value)
+    print(value.ljust(getTerminalWidth()), end=end)
 
 
 def _win32_get_terminal_size():
