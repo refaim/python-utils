@@ -82,7 +82,7 @@ def download(src, dst, progress=True, bufsize=DOWNLOAD_BUFFER_SIZE, timeout=DEFA
         remote = urllib2.urlopen(request, timeout=timeout)
 
         if progress:
-            pbar = console.ProgressBar(maxval=remotesize)
+            pbar = console.ProgressBar(maxval=remotesize, displaysize=True)
             pbar.update(localsize)
 
         # open destination file
@@ -95,4 +95,8 @@ def download(src, dst, progress=True, bufsize=DOWNLOAD_BUFFER_SIZE, timeout=DEFA
                 if progress:
                     pbar.update(len(bytes))
                 bytes = remote.read(bufsize)
+
+        if progress:
+            pbar.finish()
+
     return remotesize
